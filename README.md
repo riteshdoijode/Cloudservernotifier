@@ -1,45 +1,31 @@
 # Cloudservernotifier
-This is a simple Python script that sends notifications from a Nextcloud server running on Oracle instances cloud infrastructure to a specified Telegram chat using a Telegram bot. It leverages the Telegram Bot API to communicate with users, providing a seamless way to receive alerts from your server directly to your Telegram app.
+This is a simple Python script that sends notifications from a online storage server running on Oracle instances cloud infrastructure to a specified Telegram chat using a Telegram bot. It leverages the Telegram Bot API to communicate with users, providing a seamless way to receive alerts from your server directly to your Telegram app. It notifies the user when the server starts and sends scheduled reminders twice a day.
 
 ## Features
-- Send custom messages from your server to a Telegram chat.
-- Easy integration with any Python-based server or application.
-- Simple and lightweight, requiring only the `requests` library.
+- Sends a startup message when the script runs.
+- Sends daily notifications at **08:00 AM** and **08:00 PM**.
+- Uses the `schedule` module to manage task execution.
 
 ## Prerequisites
-Before using this script, ensure you have the following:
-- A Telegram account.
-- A Telegram Bot (created using the [BotFather](https://core.telegram.org/bots#botfather)).
-- A chat ID (you can obtain this via the [Telegram API](https://core.telegram.org/method/getUpdates)).
-- Python 3.x installed on your system.
-- The `requests` Python library.
+Make sure you have Python installed on your system. The script requires the following Python libraries:
+- `requests`
+- `schedule`
 
-## Installation
+You can install them using:
+```bash
+pip install requests schedule
+```
+## Confirgure
 
-1. Clone the repository to your local machine:
-    ```bash
-    git clone https://github.com/yourusername/NextBotAlert.git
-    ```
+Modify the following values in the script to match your telegram bot settings:
+bot_token: Your Telegram bot's API token.
+bot_chatID: Your Telegram chat ID.
 
-2. Navigate to the project folder:
-    ```bash
-    cd NextBotAlert
-    ```
+## Useage
 
-3. Install the required dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
+python script.py
 
-4. Update the script with your own **Telegram Bot Token** and **Chat ID** in `send_message.py`.
+## Security Notice
 
-## Configuration
-
-- **Telegram Bot Token**: This can be obtained by creating a bot using the [BotFather](https://core.telegram.org/bots#botfather) on Telegram.
-- **Chat ID**: You can get your chat ID using the Telegram API or other tools like [@userinfobot](https://t.me/userinfobot).
-
-Once you have the necessary information, replace the placeholder values in the script with your bot token and chat ID.
-
-```python
-telegram_bot_token = "YOUR_BOT_TOKEN"
-chat_id = "YOUR_CHAT_ID"
+Do not expose your bot token and chat ID in public repositories!
+If you're uploading this to GitHub, consider using enviroment variables or a configuration file to store sensitive data.
