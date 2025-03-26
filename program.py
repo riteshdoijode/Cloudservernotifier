@@ -1,16 +1,26 @@
 import requests
+import schedule
+import time
 
-telegram_bot_token = "Your telegram token"
-chat_id = "Your telegram chat ID"
+def telegram_bot_sendtext(bot_message):
 
-message = "Hi from nextcloud server"
+#Telegram bot token and chat ID 
 
-response = requests.post(
-	f"https://api.telegram.org/bot{telegram_bot_token}/sendMessage",
-	params={"chat_id":chat_id,"text":message}
-)
+    bot_token = 'Telegram Chat Token'
+    bot_chatID = 'Telegram Chat ID'
+    send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + \
+                '&parse-mode=MarkdownV2&text=' + bot_message
 
-if response.status_code == 200:
-	print("Message send successfullly.")
-else:
-	print("Failed to send message. Status code:", response.status_code)
+    response = requests.get(send_text)
+    return response.json()
+
+def send_bot_started_message():
+    telegram_bot_sendtext("Home server is on.")
+
+telegram_bot_sendtext("Home server has started.")
+schedule.every().day.at("08:00").do(send_bot_started_message)
+schedule.every().day.at("20:00").do(send_bot_started_message)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
